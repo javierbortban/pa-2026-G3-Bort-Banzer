@@ -1,5 +1,7 @@
 package pa;
 
+import java.util.Arrays;
+import java.util.List;
 /**
  * Clase que representa a un médico
  * 
@@ -75,18 +77,26 @@ public class Medico {
      * @return devuelve true si se trata de un día válido, y false en caso contrario
      */
     private boolean diaValido(int dia) {
-        
-        return false;
-    }
+        if (dia>=0 && dia<=4)
+        	return true;
+        else {
+        	return false;
     
+        }
+    }
     /**
      * Una franja es válida si tiene como valor "mañana" o "tarde"
      * @param franja cadena de caracteres que representa la franja horaria
      * @return true, si se trata de una franja válida, y false en caso contrario
      */
     private boolean franjaValida(String franja) {
-        
-        return false;
+        List<String> franjas= Arrays.asList("mañana","tarde");
+        if(franjas.contains(franja)) {
+        	return true;
+        }
+        else {
+        	return false;
+        }
     }
     
     /**
@@ -102,10 +112,29 @@ public class Medico {
      * o bien el día especificado es inválido o la franja especificada es inválida 
      */
     public Cita reservarCita(int dia, String franja, String paciente) {
-        Cita cita = null;
-        
-        return cita;    
-    }
+    	if (!diaValido(dia) || !franjaValida(franja)) {
+    		return null;
+    	}
+    	
+    	int inicio,fin;
+    	if(franja.equalsIgnoreCase("mañana")) {
+    		inicio=0;
+    		fin=3;
+    	}
+    	else {
+    		inicio=4;
+    		fin=7;
+    		}
+    	
+    	for (int i=inicio; i<=fin;i++) {
+    		if(horario[dia][i]==null) {
+    			Cita cita = new Cita(paciente,idMedico,especialidad,dia(dia),hora(i));
+    			horario[dia][i]=paciente;
+    			return cita;
+    		}
+    	}
+        return null;
+    }    
     
     /**
      * Método para imprimir por pantalla el horario de un médico
@@ -119,8 +148,24 @@ public class Medico {
      */ 
     public void printHorario() {
         
-        System.out.println("Método sin implementar");
-        
+        System.out.println("Horario del doctor: " + idMedico+ "   Especialidad:"+especialidad);
+        System.out.println();
+        System.out.print("\t");
+        for (int h=0;h<8;h++) {
+        	System.out.printf("%-7s", hora(h));
+        }
+        System.out.println();
+        for(int d=0;d<5;d++) {
+        	System.out.printf("%-11s",dia(d));
+        	for (int h=0;h<8;h++) {
+        		if(horario[d][h]==null) {
+        			System.out.printf("%-7s", "---");
+        		}else {
+            	System.out.printf("%-7s", horario[d][h]);
+        		}
+            }
+        	System.out.println();
+        }
     }
     
     /**
@@ -130,8 +175,11 @@ public class Medico {
      * Si el valor numérico introducido no se corresponde con ningún día se devuelve una cadena vacía
      */
     private String dia(int indice) {
-        
-        return "Método sin implementar";
+        String[] dia= {"Lunes","Martes","Miercoles","Jueves","Viernes"};
+        if (!diaValido(indice)) {
+        	return "";
+        }
+        return dia[indice];
     }
     /**
      * Método que devuelve la cadena de caracteres asociada al valor numérico correspondiente
@@ -140,8 +188,11 @@ public class Medico {
      * Si el valor numérico introducido no se corresponde con ningún día se devuelve una cadena vacía
      */
     private String hora(int indice) {
-        
-        return "Método sin implementar";
+        String[] hora={"9:00h","10:00h","11:00h","12:00h","16:00h","17:00h","18:00h","19:00h"};
+        if (indice<0 || indice>7) {
+        	return "";
+        }
+        return hora[indice];
     }
         
 }
