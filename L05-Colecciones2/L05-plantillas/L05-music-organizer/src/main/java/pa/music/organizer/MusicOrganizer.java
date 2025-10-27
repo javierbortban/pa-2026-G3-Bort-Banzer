@@ -55,7 +55,13 @@ public class MusicOrganizer {
         return fileNames;
     }
     
-    
+    public String getTitle(int index){
+    	if (validIndex(index)) {
+    		return titles.get(index-1);
+    	}else {
+    		return null;
+    	}
+    }
     
     /**
      * Start playing a file in the collection if the index is valid.
@@ -175,6 +181,7 @@ public class MusicOrganizer {
     	int index=1;
     	for(String title:titles) {
     		System.out.println("\t"+index+". "+ title);
+    		index++;
     	}
     }
     
