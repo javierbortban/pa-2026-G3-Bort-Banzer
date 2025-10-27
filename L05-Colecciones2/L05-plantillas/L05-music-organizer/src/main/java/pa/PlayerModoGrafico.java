@@ -1,0 +1,16 @@
+package pa;
+
+import pa.gui.EntornoGrafico;
+
+public class PlayerModoGrafico {
+
+	public static void main(String[] args) {
+		String[] canciones= {"All I See Is You - Omnia feat. Christian Burns","Body to Body - Sture Zetterberg",
+				"I Wish - Andrew Rayel","In The Dark-Armin van Armin van Buuren & David Guetta","Invincible - Christina Novelli",
+				"Robarte un Beso - Carlos Vives","Save Your Tears - Ariana Grande","Secret Love Song - Little Mix ft Jason Derulo",
+				"Simples Corazones - Fonseca-feat Melendi","Stay With Me - AVIRA","The Reason - Hoobastank","Vagabundo - Sebastián Yatra","With My Own Eyes - Sash"};
+		EntornoGrafico e=new EntornoGrafico(canciones);
+		e.startAplicacion();
+	}
+
+}

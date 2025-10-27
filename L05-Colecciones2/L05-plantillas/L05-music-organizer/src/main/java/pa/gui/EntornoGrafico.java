@@ -23,7 +23,7 @@ public class EntornoGrafico {
         this.listaTemas = listaTemas;
         organizadorMusica = new MusicOrganizer();              
         System.out.println("Cargando las canciones en el reproductor...");        
-        //aquí tienes que cargar en el organizador de música la lista de temas
+        organizadorMusica.loadSongs("src/main/resources/mp3", ".mp3", listaTemas);
         playing = false; 
     }
   
